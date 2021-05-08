@@ -133,6 +133,7 @@ namespace SOAP_WebService
                      conn);
 
                 command.Parameters.AddWithValue("@available", availabe ? 1:0);
+                command.Prepare();
 
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
@@ -148,6 +149,45 @@ namespace SOAP_WebService
             }
 
             return rooms;
+        }
+
+        [WebMethod]
+        public string createReservation(int IdRecepcionist, int IdClient,int ID,string Name,int Nights,string ArrivalDate)
+        {
+
+            string res = "Ningun elemento";
+
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+                {
+                    conn.Open();
+
+                    SQLiteCommand command = new SQLiteCommand("Insert into " + BDNames.RESERVATION_TABLE
+                        + " VALUES (@recepcionist, @client, @room, @name,@nights, @arrivalDate )",
+                         conn);
+
+                    command.Parameters.AddWithValue("@recepcionist", IdRecepcionist);
+                    command.Parameters.AddWithValue("@client", IdClient);
+                    command.Parameters.AddWithValue("@room", ID);
+                    command.Parameters.AddWithValue("@name", Name);
+                    command.Parameters.AddWithValue("@nights", Nights);
+                    command.Parameters.AddWithValue("@arrivalDate", ArrivalDate);
+
+                    command.Prepare();
+
+                    res = (command.ExecuteNonQuery() > 0 ) ? "Correcto" : res = "No se creo";
+                    // execute non query returns the rows affected, if there one instert return 1
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                res = e.Message;
+            }
+
+            return res;
         }
     }
 }
