@@ -29,7 +29,7 @@ namespace SOAP_WebService
         [WebMethod]
         public string pruebaSQL()
         {
-            string DBpath = Server.MapPath("items.db");
+            string DBpath = Server.MapPath("db.db");
             string query = "Insert ...";
             string a = "---";
 
@@ -40,7 +40,7 @@ namespace SOAP_WebService
             {
                 conn.Open();
 
-                SQLiteCommand command = new SQLiteCommand("Select item, price, avaible from furniture", conn);
+                SQLiteCommand command = new SQLiteCommand("Select * from User", conn);
 
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
@@ -49,7 +49,8 @@ namespace SOAP_WebService
 
                     foreach (DataRow row in dt.Rows)
                     {
-                        a = row["item"].ToString();
+                        a += row["email"].ToString() + "-";
+                        a += row["password"].ToString() + "\n";
                     }
                 }
 
