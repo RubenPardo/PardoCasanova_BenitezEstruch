@@ -6,6 +6,8 @@ using System.Web.Services;
 
 using System.Data.SQLite;
 using System.Data;
+using SOAP_WebService.controller;
+using SOAP_WebService.model;
 
 namespace SOAP_WebService
 {
@@ -27,11 +29,11 @@ namespace SOAP_WebService
         }
 
         [WebMethod]
-        public string pruebaSQL()
+        public User getUserByCredentials(string email, string password)
         {
-            string DBpath = Server.MapPath("db.db");
-            string query = "Insert ...";
-            string a = "---";
+            string DBpath = Server.MapPath(BDNames.BD_NAME);
+
+            User res = new User();
 
 
             // select
@@ -40,7 +42,18 @@ namespace SOAP_WebService
             {
                 conn.Open();
 
-                SQLiteCommand command = new SQLiteCommand("Select * from User", conn);
+                SQLiteCommand command = new SQLiteCommand("Select * from " 
+                    + BDNames.USER_TABLE 
+                    + " WHERE "
+                    + BDNames.USER_EMAIL+ "=@email " 
+                    +"AND " 
+                    + BDNames.USER_PASSWORD + "=@pass", conn);
+                // prepared statment
+                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@pass", password);
+                command.Prepare();
+
+                Console.WriteLine(command.CommandText);
 
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
@@ -49,14 +62,13 @@ namespace SOAP_WebService
 
                     foreach (DataRow row in dt.Rows)
                     {
-                        a += row["email"].ToString() + "-";
-                        a += row["password"].ToString() + "\n";
+                        res = new User(row);
                     }
                 }
 
             }
 
-            return a;
+            return res;
         }
     }
 }
