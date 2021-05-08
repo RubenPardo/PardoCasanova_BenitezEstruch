@@ -9,6 +9,7 @@ namespace SOAP_WebService.model
     public class Reservation
     {
 
+        public int Id { get; set; }
         public int IdClient { get; set; }
         public int IdRecepcionist { get; set; }
         public Room Room { get; set; }
@@ -18,8 +19,9 @@ namespace SOAP_WebService.model
 
         public Reservation() { }
 
-        public Reservation(int vC, int vR, Room room,string name, string date, int nights)
+        public Reservation(int id ,int vC, int vR, Room room,string name, string date, int nights)
         {
+            Id = id;
             IdClient = vC;
             IdRecepcionist = vR;
             Room = room;
@@ -31,7 +33,7 @@ namespace SOAP_WebService.model
 
         public Reservation(System.Data.DataRow row)
         {
-            
+            Id = int.Parse(row[BDNames.RESERVATION_ID].ToString());
             IdRecepcionist = int.Parse(row[BDNames.RESERVATION_ID_RECEPCIONIST].ToString());
             IdClient = int.Parse(row[BDNames.RESERVATION_ID_CLIENT].ToString());
             Nights = int.Parse(row[BDNames.RESERVATION_NIGHTS].ToString());

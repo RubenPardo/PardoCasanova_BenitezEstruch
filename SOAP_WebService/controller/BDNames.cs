@@ -22,6 +22,7 @@ namespace SOAP_WebService.controller
         // reservation table ----------------------------------------
         public static string RESERVATION_TABLE = "Reservation";
 
+        public static string RESERVATION_ID = "id";
         public static string RESERVATION_ID_CLIENT = "idClient";
         public static string RESERVATION_ID_RECEPCIONIST = "idRecepcionist";
         public static string RESERVATION_ID_ROOM = "idRoom";

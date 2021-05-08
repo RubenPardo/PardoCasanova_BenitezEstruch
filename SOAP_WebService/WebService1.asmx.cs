@@ -152,10 +152,10 @@ namespace SOAP_WebService
         }
 
         [WebMethod]
-        public string createReservation(int IdRecepcionist, int IdClient,int ID,string Name,int Nights,string ArrivalDate)
+        public bool createReservation(Reservation reservation)
         {
 
-            string res = "Ningun elemento";
+            bool res = false;
 
             try
             {
@@ -167,16 +167,16 @@ namespace SOAP_WebService
                         + " VALUES (@recepcionist, @client, @room, @name,@nights, @arrivalDate )",
                          conn);
 
-                    command.Parameters.AddWithValue("@recepcionist", IdRecepcionist);
-                    command.Parameters.AddWithValue("@client", IdClient);
-                    command.Parameters.AddWithValue("@room", ID);
-                    command.Parameters.AddWithValue("@name", Name);
-                    command.Parameters.AddWithValue("@nights", Nights);
-                    command.Parameters.AddWithValue("@arrivalDate", ArrivalDate);
+                    command.Parameters.AddWithValue("@recepcionist", reservation.IdRecepcionist);
+                    command.Parameters.AddWithValue("@client", reservation.IdClient);
+                    command.Parameters.AddWithValue("@room", reservation.Room.ID);
+                    command.Parameters.AddWithValue("@name", reservation.Name);
+                    command.Parameters.AddWithValue("@nights", reservation.Nights);
+                    command.Parameters.AddWithValue("@arrivalDate", reservation.ArrivalDate);
 
                     command.Prepare();
 
-                    res = (command.ExecuteNonQuery() > 0 ) ? "Correcto" : res = "No se creo";
+                    res = (command.ExecuteNonQuery() > 0);
                     // execute non query returns the rows affected, if there one instert return 1
 
 
@@ -184,7 +184,55 @@ namespace SOAP_WebService
             }
             catch (Exception e)
             {
-                res = e.Message;
+                res = false;
+            }
+
+            return res;
+        }
+
+        [WebMethod]
+        public bool updateReservation(Reservation reservation)
+        {
+
+            bool res = false;
+
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+                {
+                    conn.Open();
+
+                    SQLiteCommand command = new SQLiteCommand("UPDATE " + BDNames.RESERVATION_TABLE
+                        + " SET " +
+                        BDNames.RESERVATION_ID_RECEPCIONIST + "=@recepcionist ," +
+                        BDNames.RESERVATION_ID_CLIENT + "=@client , " +
+                        BDNames.RESERVATION_ID_ROOM + "=@room , " +
+                        BDNames.RESERVATION_NAME + "=@name ," +
+                        BDNames.RESERVATION_NIGHTS + "=@nights , " +
+                        BDNames.RESERVATION_ARRIVAL_DATE+ "=@arrivalDate " +
+                        " WHERE "+
+                        BDNames.RESERVATION_ID + "=@id" ,
+                         conn);
+
+                    command.Parameters.AddWithValue("@recepcionist", reservation.IdRecepcionist);
+                    command.Parameters.AddWithValue("@client", reservation.IdClient);
+                    command.Parameters.AddWithValue("@room", reservation.Room.ID);
+                    command.Parameters.AddWithValue("@name", reservation.Name);
+                    command.Parameters.AddWithValue("@nights", reservation.Nights);
+                    command.Parameters.AddWithValue("@arrivalDate", reservation.ArrivalDate);
+                    command.Parameters.AddWithValue("@id", reservation.Id);
+
+                    command.Prepare();
+
+                    res = (command.ExecuteNonQuery() > 0);
+                    // execute non query returns the rows affected, if there one instert return 1
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                res = false;
             }
 
             return res;
