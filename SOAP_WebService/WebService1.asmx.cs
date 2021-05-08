@@ -237,5 +237,39 @@ namespace SOAP_WebService
 
             return res;
         }
+
+        [WebMethod]
+        public bool delateReservation(int idReservation)
+        {
+
+            bool res = false;
+
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+                {
+                    conn.Open();
+
+                    SQLiteCommand command = new SQLiteCommand("DELETE from " + BDNames.RESERVATION_TABLE
+                        + " WHERE " +
+                        BDNames.RESERVATION_ID + "=@id",
+                         conn);
+                    command.Parameters.AddWithValue("@id", idReservation);
+
+                    command.Prepare();
+
+                    res = (command.ExecuteNonQuery() > 0);
+                    // execute non query returns the rows affected, if there one instert return 1
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                res = false;
+            }
+
+            return res;
+        }
     }
 }
