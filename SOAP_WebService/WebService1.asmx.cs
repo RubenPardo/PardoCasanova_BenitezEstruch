@@ -21,12 +21,12 @@ namespace SOAP_WebService
     // [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-
-        [WebMethod]
-        public string HelloWorld()
+        string DBpath;
+        public WebService1()
         {
-            return "Hola a todos";
+            DBpath = Server.MapPath(BDNames.BD_NAME);
         }
+
 
         [WebMethod]
         public User getUserByCredentials(string email, string password)
@@ -53,8 +53,6 @@ namespace SOAP_WebService
                 command.Parameters.AddWithValue("@pass", password);
                 command.Prepare();
 
-                Console.WriteLine(command.CommandText);
-
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     DataTable dt = new DataTable();
@@ -69,6 +67,55 @@ namespace SOAP_WebService
             }
 
             return res;
+        }
+
+        [WebMethod]
+        public List<Reservation> getRervationByID(int id, bool isClient)
+        {
+
+
+            List<Reservation> reservations = new List<Reservation>();
+            // select
+
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+
+                SQLiteCommand command = new SQLiteCommand("Select " +
+                    BDNames.RESERVATION_ID_ROOM + ", " +
+                    BDNames.RESERVATION_ID_RECEPCIONIST + ", " +
+                    BDNames.RESERVATION_ID_CLIENT + ", " +
+                    BDNames.RESERVATION_NAME + ", " +
+                    BDNames.RESERVATION_NIGHTS + ", " +
+                    BDNames.RESERVATION_ARRIVAL_DATE + ", "+
+                    "(SELECT "+BDNames.ROOM_NAME + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as " + BDNames.ROOM_NAME + ", " +
+                    "(SELECT " + BDNames.ROOM_TYPE + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as "+ BDNames.ROOM_TYPE + ", " +
+                    "(SELECT " + BDNames.ROOM_DESCRIPTION + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as " + BDNames.ROOM_DESCRIPTION + "," +
+                    "(SELECT " + BDNames.ROOM_PRICE + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as " + BDNames.ROOM_PRICE  +
+                    " from "
+                    + BDNames.RESERVATION_TABLE
+                    + " WHERE "
+                    + (isClient ? BDNames.RESERVATION_ID_CLIENT + "=@id " : BDNames.RESERVATION_ID_RECEPCIONIST + "=@id "),
+                     conn);
+                // prepared statment
+                command.Parameters.AddWithValue("@id", id);
+                command.Prepare();
+
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        Reservation r = new Reservation(row);
+                        reservations.Add(r);
+                    }
+                }
+
+            }
+
+            return reservations;
         }
     }
 }
