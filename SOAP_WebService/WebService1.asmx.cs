@@ -117,5 +117,37 @@ namespace SOAP_WebService
 
             return reservations;
         }
+        
+        [WebMethod]
+        public List<Room> getRooms(bool availabe)
+        {
+            List<Room> rooms = new List<Room>();
+            // select
+
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+
+                SQLiteCommand command = new SQLiteCommand("Select * from " + BDNames.ROOM_TABLE 
+                    + " WHERE "+ BDNames.ROOM_AVAILABLE+"=@available",
+                     conn);
+
+                command.Parameters.AddWithValue("@available", availabe ? 1:0);
+
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        rooms.Add(new Room(row));
+                    }
+                }
+
+            }
+
+            return rooms;
+        }
     }
 }

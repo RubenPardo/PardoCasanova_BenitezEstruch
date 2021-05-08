@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SOAP_WebService.controller;
 
 namespace SOAP_WebService.model
 {
@@ -32,7 +33,12 @@ namespace SOAP_WebService.model
 
         public Room(System.Data.DataRow row)
         {
-
+            ID = int.Parse(row[BDNames.ROOM_ID].ToString());
+            TypeRoom = row[BDNames.ROOM_TYPE].ToString();
+            Name = row[BDNames.ROOM_NAME].ToString();
+            Description = row[BDNames.ROOM_DESCRIPTION].ToString();
+            Price = float.Parse(row[BDNames.ROOM_PRICE].ToString());
+            Available = row[BDNames.ROOM_AVAILABLE].ToString() == "1";
         }
 
     }
