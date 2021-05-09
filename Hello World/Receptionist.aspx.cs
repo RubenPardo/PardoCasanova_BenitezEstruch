@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using System.Windows;
 using WebPage.ClientLogic;
 using WebPage.localhost;
 
@@ -13,24 +15,24 @@ namespace WebPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                Logic logic = new Logic();
-                User u = new User();
-                u.Id = 2;
-                u.Type = TypeUser.Recepcionist;
-                pruebaRcp.Text = logic.getReservationsById(u);
-            }
+           
+            createDynamicListReservations();
         }
 
-        public void MyFunction(object sender, EventArgs e)
+        private void createDynamicListReservations()
         {
-            Console.WriteLine("FUNCION");
+            Logic l = new Logic();
+            User u = new User();
+            u.Id = 2;
+            u.Type = TypeUser.Recepcionist;
+            HtmlGenericControl content = l.getReservationsById(u, Response);
+            pruebaRcp.Controls.Add(content);
         }
+
 
         protected void btnReservation_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CreateReservation.aspx");
+            Response.Redirect("ReservationInfo.aspx");
         }
     }
 }

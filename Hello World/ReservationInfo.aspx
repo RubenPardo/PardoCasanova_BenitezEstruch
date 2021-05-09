@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/MasterPage.Master" AutoEventWireup="true" CodeBehind="CreateReservation.aspx.cs" Inherits="WebPage.CreateReservation" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/MasterPage.Master" AutoEventWireup="true" CodeBehind="ReservationInfo.aspx.cs" Inherits="WebPage.CreateReservation" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <form action="formReservation" method="post">
@@ -37,8 +37,8 @@
             </tr>
             
             <tr>
-                <td colspan="2">
-                    <asp:Button ID="btnForm" runat="server" Text="Make Reservation" autoPostBack="false" OnClick="onCreateReservation" />
+                <td colspan="2" id="btnForms" runat="server">
+                    <asp:Button ID="btnForm" runat="server" Text="Make Reservation" autoPostBack="false" OnClick="onSumbitForm" />
 
                 </td>
             </tr>

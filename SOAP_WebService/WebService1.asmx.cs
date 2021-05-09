@@ -232,10 +232,10 @@ namespace SOAP_WebService
         }
 
         [WebMethod]
-        public bool updateReservation(Reservation reservation)
+        public string updateReservation(Reservation reservation)
         {
 
-            bool res = false;
+            string res = false;
 
             try
             {
@@ -265,7 +265,7 @@ namespace SOAP_WebService
 
                     command.Prepare();
 
-                    res = (command.ExecuteNonQuery() > 0);
+                    res = (command.ExecuteNonQuery() > 0) ? "Actualizado":"error al actualizar";
                     // execute non query returns the rows affected, if there one instert return 1
 
 
@@ -273,7 +273,7 @@ namespace SOAP_WebService
             }
             catch (Exception e)
             {
-                res = false;
+                res = e.Message;
             }
 
             return res;
