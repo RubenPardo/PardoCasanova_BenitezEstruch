@@ -16,12 +16,9 @@ namespace WebPage.ClientLogic
             wb = new WebService1();
         }
 
-        public void getRoomsAvailble()
+        public Room[] getRoomsAvailble()
         {
-            wb.getRooms(true).Select(r =>
-            {
-                return r;
-            });
+            return wb.getRooms(true);
         }
 
         public string getReservationsById(User u)
@@ -64,6 +61,17 @@ namespace WebPage.ClientLogic
             htmlBuilder.AppendLine("</div>");
             return htmlBuilder.ToString();
         }
+
+        public User[] getAllClient()
+        {
+            return wb.getAllClient();
+        }
+
+        public bool createReservation(Reservation r)
+        {
+            return wb.createReservation(r);
+        }
+
         private void MyFunction(object sender, EventArgs e)
         {
             Console.WriteLine("Xdddd");

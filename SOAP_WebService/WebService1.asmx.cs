@@ -155,6 +155,38 @@ namespace SOAP_WebService
         }
 
         [WebMethod]
+        public List<User> getAllClient()
+        {
+            List<User> users = new List<User>();
+            // select
+
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+
+                SQLiteCommand command = new SQLiteCommand("Select * from " + BDNames.USER_TABLE
+                    + " WHERE " + BDNames.USER_TYPE + "=1",
+                     conn);
+
+                
+
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        users.Add(new User(row));
+                    }
+                }
+
+            }
+
+            return users;
+        }
+
+        [WebMethod]
         public bool createReservation(Reservation reservation)
         {
 
@@ -167,7 +199,13 @@ namespace SOAP_WebService
                     conn.Open();
 
                     SQLiteCommand command = new SQLiteCommand("Insert into " + BDNames.RESERVATION_TABLE
-                        + " VALUES (@recepcionist, @client, @room, @name,@nights, @arrivalDate )",
+                        + " ("+BDNames.RESERVATION_ID_RECEPCIONIST+", " 
+                        + BDNames.RESERVATION_ID_CLIENT + ", " 
+                        + BDNames.RESERVATION_ID_ROOM + ", " 
+                        + BDNames.RESERVATION_NAME + ", "
+                        + BDNames.RESERVATION_NIGHTS + ", "
+                        + BDNames.RESERVATION_ARRIVAL_DATE
+                        + ") VALUES (@recepcionist, @client, @room, @name,@nights, @arrivalDate )",
                          conn);
 
                     command.Parameters.AddWithValue("@recepcionist", reservation.IdRecepcionist);
@@ -179,7 +217,7 @@ namespace SOAP_WebService
 
                     command.Prepare();
 
-                    res = (command.ExecuteNonQuery() > 0);
+                    res = (command.ExecuteNonQuery() > 0) ;
                     // execute non query returns the rows affected, if there one instert return 1
 
 

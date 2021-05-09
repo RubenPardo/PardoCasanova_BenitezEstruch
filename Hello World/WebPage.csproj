@@ -83,6 +83,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Content Include="Client.aspx" />
     <Content Include="ContactPage.aspx" />
+    <Content Include="CreateReservation.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Images\logo-hotel.jpg" />
     <Content Include="Login.aspx" />
@@ -133,6 +134,13 @@
     </Compile>
     <Compile Include="ContactPage.aspx.designer.cs">
       <DependentUpon>ContactPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateReservation.aspx.cs">
+      <DependentUpon>CreateReservation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateReservation.aspx.designer.cs">
+      <DependentUpon>CreateReservation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -199,10 +207,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="https://localhost:44300/WebService1.asmx%3fop=getReservationByID">
+    <WebReferenceUrl Include="https://localhost:44300/WebService1.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\localhost\</RelPath>
-      <UpdateFromURL>https://localhost:44300/WebService1.asmx%3fop=getReservationByID</UpdateFromURL>
+      <UpdateFromURL>https://localhost:44300/WebService1.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

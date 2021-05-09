@@ -17,7 +17,7 @@ namespace WebPage
             {
                 Logic logic = new Logic();
                 User u = new User();
-                u.Id = 5;
+                u.Id = 2;
                 u.Type = TypeUser.Recepcionist;
                 pruebaRcp.Text = logic.getReservationsById(u);
             }
@@ -26,6 +26,11 @@ namespace WebPage
         public void MyFunction(object sender, EventArgs e)
         {
             Console.WriteLine("FUNCION");
+        }
+
+        protected void btnReservation_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CreateReservation.aspx");
         }
     }
 }
