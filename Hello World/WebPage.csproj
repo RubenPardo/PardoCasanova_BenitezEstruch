@@ -83,6 +83,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Content Include="Client.aspx" />
     <Content Include="ContactPage.aspx" />
+    <Content Include="ReservationInfo.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Images\logo-hotel.jpg" />
     <Content Include="Login.aspx" />
@@ -126,12 +127,20 @@
     <Compile Include="Client.aspx.designer.cs">
       <DependentUpon>Client.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClientLogic\Logic.cs" />
     <Compile Include="ContactPage.aspx.cs">
       <DependentUpon>ContactPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ContactPage.aspx.designer.cs">
       <DependentUpon>ContactPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReservationInfo.aspx.cs">
+      <DependentUpon>ReservationInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReservationInfo.aspx.designer.cs">
+      <DependentUpon>ReservationInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

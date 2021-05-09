@@ -38,6 +38,7 @@ namespace SOAP_WebService.controller
         public static string ROOM_TYPE = "typeRoom";
         public static string ROOM_DESCRIPTION = "roomDescription";
         public static string ROOM_AVAILABLE = "available";
-        public static string ROOM_PRICE = "available";
+        public static string ROOM_PRICE = "price";
+        public static string ROOM_URL = "urlPhoto";
     }
 }

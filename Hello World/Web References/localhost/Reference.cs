@@ -35,6 +35,8 @@ namespace WebPage.localhost {
         
         private System.Threading.SendOrPostCallback getRoomsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getAllClientOperationCompleted;
+        
         private System.Threading.SendOrPostCallback createReservationOperationCompleted;
         
         private System.Threading.SendOrPostCallback updateReservationOperationCompleted;
@@ -87,6 +89,9 @@ namespace WebPage.localhost {
         
         /// <remarks/>
         public event getRoomsCompletedEventHandler getRoomsCompleted;
+        
+        /// <remarks/>
+        public event getAllClientCompletedEventHandler getAllClientCompleted;
         
         /// <remarks/>
         public event createReservationCompletedEventHandler createReservationCompleted;
@@ -185,6 +190,33 @@ namespace WebPage.localhost {
             if ((this.getRoomsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getRoomsCompleted(this, new getRoomsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/getAllClient", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public User[] getAllClient() {
+            object[] results = this.Invoke("getAllClient", new object[0]);
+            return ((User[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getAllClientAsync() {
+            this.getAllClientAsync(null);
+        }
+        
+        /// <remarks/>
+        public void getAllClientAsync(object userState) {
+            if ((this.getAllClientOperationCompleted == null)) {
+                this.getAllClientOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAllClientOperationCompleted);
+            }
+            this.InvokeAsync("getAllClient", new object[0], this.getAllClientOperationCompleted, userState);
+        }
+        
+        private void OngetAllClientOperationCompleted(object arg) {
+            if ((this.getAllClientCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getAllClientCompleted(this, new getAllClientCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -395,7 +427,9 @@ namespace WebPage.localhost {
         
         private string descriptionField;
         
-        private float priceField;
+        private string priceField;
+        
+        private string urlPhotoField;
         
         private bool availableField;
         
@@ -440,12 +474,22 @@ namespace WebPage.localhost {
         }
         
         /// <remarks/>
-        public float Price {
+        public string Price {
             get {
                 return this.priceField;
             }
             set {
                 this.priceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UrlPhoto {
+            get {
+                return this.urlPhotoField;
+            }
+            set {
+                this.urlPhotoField = value;
             }
         }
         
@@ -627,6 +671,32 @@ namespace WebPage.localhost {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Room[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void getAllClientCompletedEventHandler(object sender, getAllClientCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getAllClientCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getAllClientCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public User[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((User[])(this.results[0]));
             }
         }
     }

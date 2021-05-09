@@ -70,7 +70,8 @@
           <s:element minOccurs="0" maxOccurs="1" name="TypeRoom" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="Price" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UrlPhoto" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="Available" type="s:boolean" />
         </s:sequence>
       </s:complexType>
@@ -91,6 +92,21 @@
       <s:complexType name="ArrayOfRoom">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="Room" nillable="true" type="tns:Room" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getAllClient">
+        <s:complexType />
+      </s:element>
+      <s:element name="getAllClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getAllClientResult" type="tns:ArrayOfUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
         </s:sequence>
       </s:complexType>
       <s:element name="createReservation">
@@ -155,6 +171,12 @@
   <wsdl:message name="getRoomsSoapOut">
     <wsdl:part name="parameters" element="tns:getRoomsResponse" />
   </wsdl:message>
+  <wsdl:message name="getAllClientSoapIn">
+    <wsdl:part name="parameters" element="tns:getAllClient" />
+  </wsdl:message>
+  <wsdl:message name="getAllClientSoapOut">
+    <wsdl:part name="parameters" element="tns:getAllClientResponse" />
+  </wsdl:message>
   <wsdl:message name="createReservationSoapIn">
     <wsdl:part name="parameters" element="tns:createReservation" />
   </wsdl:message>
@@ -185,6 +207,10 @@
     <wsdl:operation name="getRooms">
       <wsdl:input message="tns:getRoomsSoapIn" />
       <wsdl:output message="tns:getRoomsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllClient">
+      <wsdl:input message="tns:getAllClientSoapIn" />
+      <wsdl:output message="tns:getAllClientSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="createReservation">
       <wsdl:input message="tns:createReservationSoapIn" />
@@ -221,6 +247,15 @@
     </wsdl:operation>
     <wsdl:operation name="getRooms">
       <soap:operation soapAction="http://tempuri.org/getRooms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllClient">
+      <soap:operation soapAction="http://tempuri.org/getAllClient" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -278,6 +313,15 @@
     </wsdl:operation>
     <wsdl:operation name="getRooms">
       <soap12:operation soapAction="http://tempuri.org/getRooms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllClient">
+      <soap12:operation soapAction="http://tempuri.org/getAllClient" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
