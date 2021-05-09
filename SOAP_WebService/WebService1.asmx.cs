@@ -70,7 +70,7 @@ namespace SOAP_WebService
         }
 
         [WebMethod]
-        public List<Reservation> getRervationByID(int id, bool isClient)
+        public List<Reservation> getReservationByID(int id, bool isClient)
         {
 
 
@@ -82,6 +82,7 @@ namespace SOAP_WebService
                 conn.Open();
 
                 SQLiteCommand command = new SQLiteCommand("Select " +
+                    BDNames.RESERVATION_ID + ", " +
                     BDNames.RESERVATION_ID_ROOM + ", " +
                     BDNames.RESERVATION_ID_RECEPCIONIST + ", " +
                     BDNames.RESERVATION_ID_CLIENT + ", " +
