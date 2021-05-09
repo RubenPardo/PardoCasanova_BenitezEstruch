@@ -45,9 +45,11 @@ namespace SOAP_WebService.model
                  row[BDNames.ROOM_TYPE].ToString(),
                  row[BDNames.ROOM_NAME].ToString(),
                  row[BDNames.ROOM_DESCRIPTION].ToString(),
-                 float.Parse(row[BDNames.ROOM_PRICE].ToString()),
-                 row[BDNames.ROOM_AVAILABLE].ToString() == "1"
+                 (row[BDNames.ROOM_PRICE].ToString()),
+                 row[BDNames.ROOM_AVAILABLE].ToString() == "1",
+                 row[BDNames.ROOM_URL].ToString()
             );
+
         }
     }
 }

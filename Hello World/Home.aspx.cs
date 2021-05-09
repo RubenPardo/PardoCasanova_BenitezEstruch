@@ -18,5 +18,10 @@ namespace WebPage
         {
             Response.Redirect("ContactPage.aspx");
         }
+
+        protected void btnClient_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Client.aspx");
+        }
     }
 }

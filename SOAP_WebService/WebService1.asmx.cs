@@ -92,7 +92,9 @@ namespace SOAP_WebService
                     "(SELECT "+BDNames.ROOM_NAME + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as " + BDNames.ROOM_NAME + ", " +
                     "(SELECT " + BDNames.ROOM_TYPE + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as "+ BDNames.ROOM_TYPE + ", " +
                     "(SELECT " + BDNames.ROOM_DESCRIPTION + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as " + BDNames.ROOM_DESCRIPTION + "," +
-                    "(SELECT " + BDNames.ROOM_PRICE + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as " + BDNames.ROOM_PRICE  +
+                    "(SELECT " + BDNames.ROOM_PRICE + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as " + BDNames.ROOM_PRICE +"," +
+                    "(SELECT " + BDNames.ROOM_URL + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as " + BDNames.ROOM_URL +"," +
+                    "(SELECT " + BDNames.ROOM_AVAILABLE + " from Room WHERE " + BDNames.ROOM_ID + " = " + BDNames.RESERVATION_ID_ROOM + ") as " + BDNames.ROOM_AVAILABLE  +
                     " from "
                     + BDNames.RESERVATION_TABLE
                     + " WHERE "

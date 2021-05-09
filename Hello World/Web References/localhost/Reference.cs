@@ -395,7 +395,9 @@ namespace WebPage.localhost {
         
         private string descriptionField;
         
-        private float priceField;
+        private string priceField;
+        
+        private string urlPhotoField;
         
         private bool availableField;
         
@@ -440,12 +442,22 @@ namespace WebPage.localhost {
         }
         
         /// <remarks/>
-        public float Price {
+        public string Price {
             get {
                 return this.priceField;
             }
             set {
                 this.priceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UrlPhoto {
+            get {
+                return this.urlPhotoField;
+            }
+            set {
+                this.urlPhotoField = value;
             }
         }
         

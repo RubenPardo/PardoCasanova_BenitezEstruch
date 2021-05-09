@@ -126,6 +126,7 @@
     <Compile Include="Client.aspx.designer.cs">
       <DependentUpon>Client.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClientLogic\Logic.cs" />
     <Compile Include="ContactPage.aspx.cs">
       <DependentUpon>ContactPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -198,10 +199,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="https://localhost:44300/WebService1.asmx">
+    <WebReferenceUrl Include="https://localhost:44300/WebService1.asmx%3fop=getReservationByID">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\localhost\</RelPath>
-      <UpdateFromURL>https://localhost:44300/WebService1.asmx</UpdateFromURL>
+      <UpdateFromURL>https://localhost:44300/WebService1.asmx%3fop=getReservationByID</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
