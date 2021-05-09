@@ -17,43 +17,60 @@ namespace WebPage
         User[] users;
         Logic logic;
         bool isModify;
-        Reservation r;
+        Reservation r = new Reservation();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             logic = new Logic();
-            
 
 
             isModify = Request.QueryString["isModify"] != null;
 
-            
-            roomsAvailabes = logic.getRoomsAvailble();
-            users = logic.getAllClient();
-            bindRoomSelect();
-            bindUserSelect();
+            if (!IsPostBack)
+            {
 
+                roomsAvailabes = logic.getRoomsAvailble();
+                users = logic.getAllClient();
+                bindRoomSelect();
+                bindUserSelect();
+
+                if (isModify)
+                {
+                    
+                    bindForm();
+
+                }
+            }
             if (isModify)
             {
-                HtmlButton btnDelete = new HtmlButton();
-                btnDelete.Attributes.Add("runat", "server");
-                btnDelete.InnerText = "Delete";
-                btnDelete.ServerClick += onDeleteReservation;
-                btnForms.Controls.Add(btnDelete);
-
-                bindForm();
-                btnForm.Text = "Update Reservation";
+                addButtonModify();
             }
+        }
 
-            
+        private void addButtonModify()
+        {
+            HttpCookie reservation = Request.Cookies["reservation"];
+            r.Id = int.Parse(reservation["r-id"]);
 
-            
+            HtmlButton btnDelete = new HtmlButton();
+            btnDelete.Attributes.Add("runat", "server");
+            btnDelete.InnerText = "Delete Reservation";
+            btnDelete.ServerClick += onDeleteReservation;
 
+            HtmlButton btnUpdate = new HtmlButton();
+            btnUpdate.Attributes.Add("runat", "server");
+            btnUpdate.InnerText = "Update Reservation";
+            btnUpdate.ServerClick += onUpdate;
+
+            btnForm.Visible = false;
+
+            btnForms.Controls.Add(btnUpdate);
+            btnForms.Controls.Add(btnDelete);
         }
 
         protected void onDeleteReservation(object sender, EventArgs e)
         {
-            
+
             Logic l = new Logic();
             if (l.deleteReservation(r))
             {
@@ -63,14 +80,13 @@ namespace WebPage
             {
                 lblRes.Text = "Erro when Deleting";
             }
-           
-            
+
+
 
         }
 
         private void bindForm()
         {
-            r = new Reservation();
             Room room = new Room();
             HttpCookie reservation = Request.Cookies["reservation"];
 
@@ -92,52 +108,57 @@ namespace WebPage
 
         }
 
-        protected void onSumbitForm(object sender, EventArgs e)
+        protected void onUpdate(object sender, EventArgs e)
         {
-            string name = txtName.Value;
-            string nights = txtNights.Value;
-            string date = txtDate.Value;
-            string idRoom = slctRoom.Value;
-            string idClient = slctUser.Value;
-
             // chcek form
-
-            Reservation r = new Reservation();
             r.IdRecepcionist = 2;// cambiar a por el user
-            r.Name = name;
-            r.ArrivalDate = date;
-            r.Nights = int.Parse(nights);
+            r.Name = txtName.Value;
+            r.ArrivalDate = txtDate.Value;
+            r.Nights = int.Parse(txtNights.Value);
+
 
             Room room = new Room();
-            room.ID = int.Parse(idRoom);
+            room.ID = int.Parse(slctRoom.Value);
             r.Room = room;
 
-            r.IdClient = int.Parse(idClient);
+            r.IdClient = int.Parse(slctUser.Value);
 
-            if (isModify)
+            if (logic.updateReservation(r))
             {
-                if (logic.updateReservation(r))
-                {
-                    lblRes.Text = "Updated Correctly";
-                }
-                else
-                {
-                    lblRes.Text = "Error when updating";
-                }
+                lblRes.Text = "Updated Correctly";
+                Response.Redirect("Receptionist.aspx");
             }
             else
             {
-                if (logic.createReservation(r))
-                {
-                    lblRes.Text = "Created correctly";
-                }
-                else
-                {
-                    lblRes.Text = "Error when creating";
-                }
+                lblRes.Text = "Error when updating";
             }
-            
-            
+        }
+
+        protected void onSumbitForm(object sender, EventArgs e)
+        {
+
+
+            // chcek form
+            r.IdRecepcionist = 2;// cambiar a por el user
+            r.Name = txtName.Value;
+            r.ArrivalDate = txtDate.Value;
+            r.Nights = int.Parse(txtNights.Value);
+
+            Room room = new Room();
+            room.ID = int.Parse(slctRoom.Value);
+            r.Room = room;
+
+            r.IdClient = int.Parse(slctUser.Value);
+
+
+            if (logic.createReservation(r))
+            {
+                lblRes.Text = "Created correctly";
+            }
+            else
+            {
+                lblRes.Text = "Error when creating";
+            }
 
 
 
@@ -166,7 +187,7 @@ namespace WebPage
 
         private void bindRoomSelect()
         {
-            if(roomsAvailabes.Length == 0)
+            if (roomsAvailabes.Length == 0)
             {
                 ListItem l = new ListItem();
                 l.Value = "-1";
@@ -175,7 +196,7 @@ namespace WebPage
                 slctRoom.Disabled = true;
             }
 
-            foreach(Room r in roomsAvailabes)
+            foreach (Room r in roomsAvailabes)
             {
                 ListItem l = new ListItem();
                 l.Value = r.ID.ToString();
@@ -184,4 +205,6 @@ namespace WebPage
             }
         }
     }
+
+
 }

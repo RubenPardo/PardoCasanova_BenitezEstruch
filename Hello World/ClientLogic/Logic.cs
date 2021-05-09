@@ -42,6 +42,8 @@ namespace WebPage.ClientLogic
                     li.Attributes.Add("class", "li-reservation-list");
 
                     ul.Controls.Add(li);
+                    HtmlGenericControl h3 = new HtmlGenericControl("h3");
+                    h3.InnerText = r.Name;
 
                     HtmlGenericControl img = new HtmlGenericControl("img");
                     img.Attributes.Add("src", r.Room.UrlPhoto);
@@ -51,6 +53,7 @@ namespace WebPage.ClientLogic
                     description.InnerText = r.Room.Description;
                     HtmlGenericControl divCheckIn = new HtmlGenericControl("div");
 
+                    li.Controls.Add(h3);
                     li.Controls.Add(img);
                     li.Controls.Add(name);
                     li.Controls.Add(description);
