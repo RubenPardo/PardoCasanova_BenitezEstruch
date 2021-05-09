@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="getUserByCredentials">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getUserByCredentialsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getUserByCredentialsResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="User">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Type" type="tns:TypeUser" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TypeUser">
+        <s:restriction base="s:string">
+          <s:enumeration value="Client" />
+          <s:enumeration value="Recepcionist" />
+          <s:enumeration value="NotFound" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="getReservationByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="isClient" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getReservationByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getReservationByIDResult" type="tns:ArrayOfReservation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReservation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Reservation" nillable="true" type="tns:Reservation" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Reservation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdClient" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdRecepcionist" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Room" type="tns:Room" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ArrivalDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Nights" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Room">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TypeRoom" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="Available" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getRooms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="availabe" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getRoomsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getRoomsResult" type="tns:ArrayOfRoom" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRoom">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Room" nillable="true" type="tns:Room" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="createReservation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="reservation" type="tns:Reservation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="createReservationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="createReservationResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateReservation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="reservation" type="tns:Reservation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateReservationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="updateReservationResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="delateReservation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idReservation" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="delateReservationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="delateReservationResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getUserByCredentialsSoapIn">
+    <wsdl:part name="parameters" element="tns:getUserByCredentials" />
+  </wsdl:message>
+  <wsdl:message name="getUserByCredentialsSoapOut">
+    <wsdl:part name="parameters" element="tns:getUserByCredentialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getReservationByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:getReservationByID" />
+  </wsdl:message>
+  <wsdl:message name="getReservationByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:getReservationByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRoomsSoapIn">
+    <wsdl:part name="parameters" element="tns:getRooms" />
+  </wsdl:message>
+  <wsdl:message name="getRoomsSoapOut">
+    <wsdl:part name="parameters" element="tns:getRoomsResponse" />
+  </wsdl:message>
+  <wsdl:message name="createReservationSoapIn">
+    <wsdl:part name="parameters" element="tns:createReservation" />
+  </wsdl:message>
+  <wsdl:message name="createReservationSoapOut">
+    <wsdl:part name="parameters" element="tns:createReservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateReservationSoapIn">
+    <wsdl:part name="parameters" element="tns:updateReservation" />
+  </wsdl:message>
+  <wsdl:message name="updateReservationSoapOut">
+    <wsdl:part name="parameters" element="tns:updateReservationResponse" />
+  </wsdl:message>
+  <wsdl:message name="delateReservationSoapIn">
+    <wsdl:part name="parameters" element="tns:delateReservation" />
+  </wsdl:message>
+  <wsdl:message name="delateReservationSoapOut">
+    <wsdl:part name="parameters" element="tns:delateReservationResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebService1Soap">
+    <wsdl:operation name="getUserByCredentials">
+      <wsdl:input message="tns:getUserByCredentialsSoapIn" />
+      <wsdl:output message="tns:getUserByCredentialsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getReservationByID">
+      <wsdl:input message="tns:getReservationByIDSoapIn" />
+      <wsdl:output message="tns:getReservationByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getRooms">
+      <wsdl:input message="tns:getRoomsSoapIn" />
+      <wsdl:output message="tns:getRoomsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="createReservation">
+      <wsdl:input message="tns:createReservationSoapIn" />
+      <wsdl:output message="tns:createReservationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateReservation">
+      <wsdl:input message="tns:updateReservationSoapIn" />
+      <wsdl:output message="tns:updateReservationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="delateReservation">
+      <wsdl:input message="tns:delateReservationSoapIn" />
+      <wsdl:output message="tns:delateReservationSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getUserByCredentials">
+      <soap:operation soapAction="http://tempuri.org/getUserByCredentials" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReservationByID">
+      <soap:operation soapAction="http://tempuri.org/getReservationByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRooms">
+      <soap:operation soapAction="http://tempuri.org/getRooms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createReservation">
+      <soap:operation soapAction="http://tempuri.org/createReservation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateReservation">
+      <soap:operation soapAction="http://tempuri.org/updateReservation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delateReservation">
+      <soap:operation soapAction="http://tempuri.org/delateReservation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getUserByCredentials">
+      <soap12:operation soapAction="http://tempuri.org/getUserByCredentials" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReservationByID">
+      <soap12:operation soapAction="http://tempuri.org/getReservationByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRooms">
+      <soap12:operation soapAction="http://tempuri.org/getRooms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createReservation">
+      <soap12:operation soapAction="http://tempuri.org/createReservation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateReservation">
+      <soap12:operation soapAction="http://tempuri.org/updateReservation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delateReservation">
+      <soap12:operation soapAction="http://tempuri.org/delateReservation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService1">
+    <wsdl:port name="WebService1Soap" binding="tns:WebService1Soap">
+      <soap:address location="https://localhost:44300/WebService1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebService1Soap12" binding="tns:WebService1Soap12">
+      <soap12:address location="https://localhost:44300/WebService1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
