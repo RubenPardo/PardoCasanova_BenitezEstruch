@@ -5,4 +5,6 @@
     <span>This is the best hotel in the world! (Description about the hotel)</span>
     <p></p>
     <asp:Button ID="CTA_button" runat="server" Text="Reserve" OnClick="CTA_button_Click" />
+    <asp:Button ID="btnClient" runat="server" Text="PRUEBA CLIENT" OnClick="btnClient_Click" />
+    <asp:Button ID="btnRecepcionist" runat="server" Text="PRUEBA RECEPCIONIST" OnClick="btnClient_Click1" />
 </asp:Content>
