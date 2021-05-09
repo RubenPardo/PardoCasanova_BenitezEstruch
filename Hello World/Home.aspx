@@ -4,5 +4,5 @@
     <h2>Welcome to the hotel</h2>
     <span>This is the best hotel in the world! (Description about the hotel)</span>
     <p></p>
-    <button id="CTA" runat="server"  onclick="">Reserve</button>
+    <asp:Button ID="CTA_button" runat="server" Text="Reserve" OnClick="CTA_button_Click" />
 </asp:Content>

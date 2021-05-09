@@ -81,10 +81,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Content Include="Client.aspx" />
     <Content Include="ContactPage.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Images\logo-hotel.jpg" />
     <Content Include="Login.aspx" />
+    <Content Include="Receptionist.aspx" />
     <Content Include="Style\MasterPage.css" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -117,6 +119,13 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.aspx.cs">
+      <DependentUpon>Client.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client.aspx.designer.cs">
+      <DependentUpon>Client.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ContactPage.aspx.cs">
       <DependentUpon>ContactPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -150,6 +159,13 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Receptionist.aspx.cs">
+      <DependentUpon>Receptionist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Receptionist.aspx.designer.cs">
+      <DependentUpon>Receptionist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Web References\localhost\Reference.cs">
       <AutoGen>True</AutoGen>
