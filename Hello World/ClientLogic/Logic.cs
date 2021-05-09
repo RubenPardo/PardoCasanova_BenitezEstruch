@@ -33,7 +33,7 @@ namespace WebPage.ClientLogic
 
             divPadre.Controls.Add(ul);
 
-            Reservation[] reservations = wb.getReservationByID(u.Id, false);
+            Reservation[] reservations = wb.getReservationByID(u.Id, isClient);
             if(reservations.Length != 0)
             {
                 foreach (Reservation r in reservations)

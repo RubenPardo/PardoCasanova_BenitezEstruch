@@ -17,7 +17,7 @@ namespace WebPage
             User u = new User();
             u.Id = 1;
             u.Type = TypeUser.Client;
-            //prueba.Text = logic.getReservationsById(u);
+            prueba.Controls.Add(logic.getReservationsById(u,Response));
 
         }
     }
