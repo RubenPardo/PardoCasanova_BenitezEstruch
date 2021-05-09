@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.UI.WebControls;
 using WebPage.localhost;
 
 namespace WebPage.ClientLogic
@@ -47,6 +48,14 @@ namespace WebPage.ClientLogic
                     htmlBuilder.AppendLine("<div> <h4 class='reservation-list-check-in'>Check in</h4><p>"+
                         r.ArrivalDate+" / "+ r.Nights + " Nights</p></div> ");
                     htmlBuilder.AppendLine("<div class='reservation-price'>" + r.Room.Price + "</div>");
+                    
+                    if(u.Type == TypeUser.Recepcionist)
+                    {
+                        htmlBuilder.AppendLine("<div class='reservation-logic'>");
+                        htmlBuilder.AppendLine("<button  runat='server' text='Button' onclick='MyFunction' OnClientClick='return false;'>Button</Button>");
+                        
+                        htmlBuilder.AppendLine("</div>");
+                    }
 
                 }
                 htmlBuilder.AppendLine("</ul> </li> ");
@@ -55,6 +64,11 @@ namespace WebPage.ClientLogic
             htmlBuilder.AppendLine("</div>");
             return htmlBuilder.ToString();
         }
-
+        private void MyFunction(object sender, EventArgs e)
+        {
+            Console.WriteLine("Xdddd");
+        }
     }
+
+  
 }
