@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI.HtmlControls;
 using WebPage.localhost;
 
@@ -19,6 +20,11 @@ namespace WebPage.ClientLogic
         public Room[] getRoomsAvailble()
         {
             return wb.getRooms(true);
+        }
+
+        public User getUserByCredentials(string username, string password)
+        {
+            return wb.getUserByCredentials(username, password);
         }
 
         public HtmlGenericControl getReservationsById(User u, HttpResponse response)
@@ -143,6 +149,7 @@ namespace WebPage.ClientLogic
         {
             return wb.updateReservation(r);
         }
+
 
     }
 

@@ -10,7 +10,7 @@
     <header>
 
         <div>
-            <a href="Home.aspx">
+            <a href="Index.aspx">
                 <img src="../Images/logo-hotel.jpg" alt="logo" width="100" height="100" />
                 <h1>Hotel Bahia</h1>
             </a>

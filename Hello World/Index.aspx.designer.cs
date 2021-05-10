@@ -11,7 +11,7 @@ namespace WebPage
 {
 
 
-    public partial class Home
+    public partial class Index
     {
 
         /// <summary>

@@ -5,13 +5,17 @@
         <h2>Login Page</h2>
         <div>
             <asp:Label ID="Label1" runat="server" Text="Username"></asp:Label>
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <input id="txtUserName" type="text" runat="server">
+            
         </div>
         <div>
             <asp:Label ID="Label2" runat="server" Text="Password"></asp:Label>
-            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            <input id="txtUserPass" type="password" runat="server">
+            
         </div>
-        <asp:Button ID="Button1" runat="server" Text="Login" OnClick="" />
+         <asp:Label ID="Warninglogin" runat="server" Text=""></asp:Label>
+        <br />
+        <asp:Button ID="Button1" runat="server" Text="Login" OnClick="Button1_Click" />
     </section>
     
 </asp:Content>
