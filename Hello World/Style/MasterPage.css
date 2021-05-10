@@ -8,27 +8,39 @@ html {
 }
 
 body {
+    margin: 0 auto;
     font-family:Calibri;
 }
 
 header {
     background-color: #333333;
     color: #ffffff;
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 }
 
-    header h1 {
-        margin-left: 32px;
-    }
+#Logo {
+    width: 250px;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: none;
+}
 
-    nav {
-        display: flex;
-        justify-content: center;
-    }
+#Logo img{
+    border:inherit;
+    border-radius: 4px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    height: 60px;
+}
 
         nav ul {
             list-style: none;
@@ -47,6 +59,58 @@ header {
                 text-decoration: none;
                 display: block;
             }
+
+#textHeader{
+    color: #ffffff;
+}
+
+/*End header*/
+/*================================================================*/
+/*================================================================*/
+/*Content main*/
+
+.CenterPanel{
+    margin: 100px 200px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+    .CenterPanel #mainContent {
+        width: 400px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .CenterPanel #mainContent h2 {
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    .CenterPanel #mainContent p {
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        text-align:justify;
+        text-align:justify;
+    }
+
+#MainContent_CTA_button {
+    width: 192px;
+    height: 32px;
+    background-color: #f4da4c;
+    border: medium;
+    border-radius: 5px;
+    border-style: ridge;
+}
+
+
+
 
 
 footer {
