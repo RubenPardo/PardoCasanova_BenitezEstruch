@@ -5,21 +5,20 @@
 <html>
 <head runat="server">
     <title>Hotel Bahia</title>
+    <link href="../Style/MasterPage.css" rel="stylesheet" />
 </head>
 <body>
     <header>
 
-        <div>
-            <a href="Index.aspx">
-                <img src="../Images/logo-hotel.jpg" alt="logo" width="100" height="100" />
-                <h1>Hotel Bahia</h1>
-            </a>
-        </div>
+        <a href="Index.aspx" id="Logo">
+            <img src="../Images/logo-hotel.jpg" alt="logo" width="50" height="50" />
+            <h1 id="textHeader">Hotel Bahia</h1>
+        </a>
         
         <nav>
             <ul>
-                <li><a href="ContactPage.aspx">Contact us</a></li>
-                <li><a href="Login.aspx">Log In</a></li>   
+                <li><a href="ContactPage.aspx" id="textHeader">Contact us</a></li>
+                <li><a href="Login.aspx" id="textHeader">Log In</a></li>   
             </ul>
         </nav>
             

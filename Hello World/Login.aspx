@@ -6,7 +6,7 @@
         <div>
             <asp:Label ID="Label1" runat="server" Text="Username"></asp:Label>
             <input id="txtUserName" type="text" runat="server">
-            
+            <br />
         </div>
         <div>
             <asp:Label ID="Label2" runat="server" Text="Password"></asp:Label>
